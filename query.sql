@@ -42,6 +42,27 @@
 
 --salary having more then one records the above sql query will return more then one
 
-
+	select distinct salary 
+	from employee order by salary desc limit 1 offset 1;
+	
+	-- limit means, how many recors we want
+	-- offset nothing but row index(how many records we want to skip)
+	
+--Using Dense_Rank() (for advance SQL analytic function)
+	select salary from (
+				select salary, Dense_Rank() over(order by salary desc)
+				as rank
+				from employee
+			)
+			as ranked where rank =2;
+			
+  
+    select distinct salary  from (select salary, dense_rank() over (order by salary desc) as rnks
+	from app_db.employee) as ranked where rnks=2;
+	
+	--above sql query will we return unique row( If se not appling distinct then will 
+	--return multiple with same salary
+			
+	
 		
 		
