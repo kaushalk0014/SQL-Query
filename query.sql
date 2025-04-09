@@ -62,6 +62,16 @@
 	
 	--above sql query will we return unique row( If se not appling distinct then will 
 	--return multiple with same salary
+
+-- Find Nth highest salary
+	
+	select destinct salary
+	from employee e1 where (
+		select count(distinct salary)
+		from employee e2
+		where e2.salary>e1.salary
+	) = N-1;
+	
 			
 	
 		
