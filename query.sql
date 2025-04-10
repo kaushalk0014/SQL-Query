@@ -72,6 +72,15 @@
 		where e2.salary>e1.salary
 	) = N-1;
 	
+-- Find all duplicate records by first_name
+
+	select first_name, count(*) from employee
+	group by first_name
+	having count(*)>1;
+	
+--Find employee with the highest salary in each department
+
+	
 			
 	
 		
