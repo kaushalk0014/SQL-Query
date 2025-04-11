@@ -79,6 +79,84 @@
 	having count(*)>1;
 	
 --Find employee with the highest salary in each department
+	
+	select * from employee e where
+	salary =(select max(salary) from employee
+	where department=e.department;
+	
+--Employees Hired in the last 6 MONTHS_BETWEEN
+	
+	select * from employee
+	where hire_date>=CURDATE()-INTERVAL-6 MONTH;
+	
+--department wise Average salary
+		select department, avg(salary)
+		as avg_salary
+		from employee
+		group by department;
+		
+--Count of Employees i each department
+			
+	Select department, count(*) as total_employees
+	from employee group by department;
+	
+-- Find employee with same salary
+
+	select salary, count(*) as count
+	from employee
+	group by salary
+	having count(*)>1;
+	
+-- self join employee and their manager
+
+	select e.first_name as employee, m.first_name as manager
+	from employee e
+	left join employee m on 
+	e.manager_id=m.id;
+	
+-- Retrive employee with Null value in manager
+	
+	select *from employee
+	where manager_id is null;
+	
+-- Find emploees whose name start with 'A'
+
+	select * from employee where name like 'A%';
+	
+-- Top 3 salaries
+
+	select distinct salary 
+	from employee
+	order by salary desc
+	limit 3;
+	
+-- Total salary per(each) department
+
+	select depertment, sum(salary) as total_salary
+	from employee
+	group by department;
+	
+-- Employees who earn more then department Average
+	
+	select * from employee e1
+	where salary>(
+				select avg(salary)
+				from employee
+				where department=e1.department
+			);
+		
+-- Using CASE Grade Employees by salary
+	
+	select first_name, salary
+		case 
+			when salary>=8000 then 'high'
+			when salary>=5000 then 'Medium'
+		else 'Low'
+	end as Grade
+	from employee;
+	
+-- 
+
 
 	
 			
