@@ -155,8 +155,48 @@
 	end as Grade
 	from employee;
 	
--- 
+-- Using window function Rank salaries
 
+	select first_name, salary
+	Rank() over (order by salary desc)
+	as salary_rank
+	from employee;
+	
+-- Retirieve cmmon records from two tale
+
+	select * from employee INTERSECT
+	select * from from employee BACKUP;
+
+-- List employee with same hire DATE
+	
+	select hire_date, count(*) from employee
+	group by hire_date
+	having count(*)>1;
+	
+-- Find the youngest and olderst employee
+	select * from 
+	employee where hire_date= (select max(hire_date) from employee)
+	or hire_date = (select min(hire_date) from employee;
+
+-- Create sql view
+	
+	create view view_name as  
+	select column1, column2, col....
+	from table_name where condition;
+	
+	create view employee_view as select first_name, last_name, 
+	salary from employee where salary > 5000;
+	
+-- how to use view in sql
+	select * from view_name;
+	
+-- If we want to change the view
+	
+	create or replace view high_earnersnas as select id, first_name, salary,
+	department_id from employee where salary>80000;
+
+-- To drop view
+	drop view view_name
 
 	
 			
